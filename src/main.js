@@ -6,6 +6,8 @@ import "@imengyu/vue3-context-menu/lib/vue3-context-menu.css";
 import ContextMenu from "@imengyu/vue3-context-menu";
 
 const app = createApp(App);
-app.use(VueKonva, ContextMenu);
-app.mount("#app");
 
+app.use(VueKonva);
+app.use(ContextMenu);
+
+app.mount("#app");

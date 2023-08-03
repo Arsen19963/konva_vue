@@ -1,23 +1,16 @@
 <template>
   <div>
     <div id="container" @contextmenu="onContextMenu($event)"></div>
-    <!-- <div id="buttons">
-      <button @click="moveToTop">Move yellow box to top</button>
-      <button @click="moveToBottom">Move yellow box to bottom</button>
-      <button @click="moveUp">Move yellow box up</button>
-      <button @click="moveDown">Move yellow box down</button>
-      <button @click="setZIndex">Set yellow box zIndex to 3</button>
-    </div> -->
   </div>
 </template>
 
 <script>
-import ContextMenu from "@imengyu/vue3-context-menu";
+// import ContextMenu from "@imengyu/vue3-context-menu";
 export default {
   name: "KonvaDemo",
   data() {
     return {
-      yellowBox: null,
+      generalBox: null,
     };
   },
   mounted() {
@@ -34,8 +27,6 @@ export default {
     const offsetX = 0;
     const offsetY = 0;
     const colors = ["red", "orange", "yellow", "green", "blue", "purple"];
-
-    // onClickOutside
 
     for (let n = 0; n < 6; n++) {
       const i = n;
@@ -59,8 +50,13 @@ export default {
         document.body.style.cursor = "default";
       });
 
-      if (colors[i] === "yellow") {
-        this.yellowBox = box;
+      box.on("contextmenu", (e) => {
+        const clickedBox = e.target;
+        this.generalBox = clickedBox;
+      });
+
+      if (colors[i]) {
+        this.generalBox = box;
       }
 
       layer.add(box);
@@ -70,50 +66,72 @@ export default {
   },
   methods: {
     moveToTop() {
-      if (this.yellowBox) {
-        this.yellowBox.moveToTop();
+      if (this.generalBox) {
+        this.generalBox.moveToTop();
       }
     },
     moveToBottom() {
-      if (this.yellowBox) {
-        this.yellowBox.moveToBottom();
+      if (this.generalBox) {
+        this.generalBox.moveToBottom();
       }
     },
     moveUp() {
-      if (this.yellowBox) {
-        this.yellowBox.moveUp();
+      if (this.generalBox) {
+        this.generalBox.moveUp();
       }
     },
     moveDown() {
-      if (this.yellowBox) {
-        this.yellowBox.moveDown();
+      if (this.generalBox) {
+        this.generalBox.moveDown();
       }
     },
     setZIndex() {
-      if (this.yellowBox) {
-        this.yellowBox.setZIndex(3);
+      if (this.generalBox) {
+        this.generalBox.setZIndex(3);
       }
     },
-    onContextMenu(e: MouseEvent) {
+    onContextMenu(e, clickedBox) {
       //prevent the browser's default menu
       e.preventDefault();
+
       //show your menu
       this.$contextmenu({
         x: e.x,
         y: e.y,
         items: [
           {
-            label: "A menu item",
-            onClick: () => {
-              alert("You click a menu item");
-            },
-          },
-          {
             label: "A submenu",
             children: [
-              { label: "Item1" },
-              { label: "Item2" },
-              { label: "Item3" },
+              {
+                label: "Move to Top",
+                onClick: () => {
+                  this.moveToTop(clickedBox);
+                },
+              },
+              {
+                label: "Move to Bottom",
+                onClick: () => {
+                  this.moveToBottom(clickedBox);
+                },
+              },
+              {
+                label: "Move Up",
+                onClick: () => {
+                  this.moveUp(clickedBox);
+                },
+              },
+              {
+                label: "Move Down",
+                onClick: () => {
+                  this.moveDown(clickedBox);
+                },
+              },
+              {
+                label: "Set Z Index to 3",
+                onClick: () => {
+                  this.setZIndex(clickedBox);
+                },
+              },
             ],
           },
         ],
