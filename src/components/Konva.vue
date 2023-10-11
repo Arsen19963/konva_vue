@@ -1,15 +1,16 @@
 <template>
-  <div>
-    <div id="container" @contextmenu="onContextMenu($event)"></div>
-  </div>
+  <div id="container" @contextmenu="onContextMenu($event)"></div>
 </template>
 
 <script>
-// import ContextMenu from "@imengyu/vue3-context-menu";
 export default {
   name: "KonvaDemo",
+
   data() {
     return {
+      width: "", // Added this property
+      height: "", // Added this property
+      color: "", // Added this property
       generalBox: null,
     };
   },
@@ -140,21 +141,3 @@ export default {
   },
 };
 </script>
-<style>
-body {
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  background-color: #f0f0f0;
-}
-#buttons {
-  border: 1px solid black;
-  position: fixed;
-  left: 10px;
-  top: 0px;
-}
-button {
-  margin-top: 10px;
-  display: block;
-}
-</style>

@@ -1,14 +1,17 @@
 <template>
-  <Konva />
+  <Shape />
+  <!-- <TestKonva /> -->
 </template>
 
 <script>
-import Konva from "./components/Konva.vue";
+// import TestKonva from "./components/TestKonva.vue";
+import Shape from "./components/Shape.vue";
+// import Konva from "./components/Konva.vue";
+
 export default {
   components: {
-    Konva,
+    Shape,
+    // TestKonva,
   },
 };
 </script>
-
-<style></style>
